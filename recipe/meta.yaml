@@ -6,8 +6,6 @@ package:
   version: {{ version }}
 
 source:
-  #url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  #sha256: 52fd46ee46f6c8667692682c1fd7134edc65a2d2d084ebec1d295a6087fc0291
   url: https://github.com/conan-io/python-{{ name }}/archive/refs/tags/{{ version }}.tar.gz
   sha256: 322b2ffe37c35ff4c6bc8e17f6a4928990ed343e9df3f350ca7542bc219e452f
 
