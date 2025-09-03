@@ -1,31 +1,42 @@
 {% set name = "patch-ng" %}
-{% set version = "1.17.4" %}
+{% set version = "1.18.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 627abc5bd723c8b481e96849b9734b10065426224d4d22cd44137004ac0d4ace
+  url: https://github.com/conan-io/python-{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 322b2ffe37c35ff4c6bc8e17f6a4928990ed343e9df3f350ca7542bc219e452f
 
 build:
-  noarch: python
   number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - patch-ng = patch_ng:main
-  script: {{ PYTHON }} -m pip install . -vv
+  skip: true  # [py<36]
 
 requirements:
   host:
     - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python
 
 test:
+  source_files:
+    - tests
+    - patch_ng.py
+  imports:
+    - patch_ng
   commands:
+    - pip check
     - patch-ng --help
+    - python tests/run_tests.py
+  requires:
+    - pip
 
 about:
   home: https://github.com/conan-io/python-patch-ng
@@ -33,6 +44,15 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: Library to parse and apply unified diffs
+  description: |
+    This project is a fork from the original python-patch project.
+    As any other project, bugs are common during the development process, the combination of issues + pull requests
+    are able to keep the constant improvement of a project. However, both community and author need to be aligned.
+    When users, developers, the community, needs a fix which are important for their projects, but there is no answer
+    from the author, or the time for response is not enough, then the most plausible way is forking and continuing
+    a parallel development.
+  doc_url: https://github.com/conan-io/python-patch-ng/tree/master/doc
+  dev_url: https://github.com/conan-io/python-patch-ng
 
 extra:
   recipe-maintainers:
