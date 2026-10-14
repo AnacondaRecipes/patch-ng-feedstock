@@ -1,5 +1,5 @@
 {% set name = "patch-ng" %}
-{% set version = "1.19.1" %}
+{% set version = "11.01" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/conan-io/python-{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: f9789385d8a0a8838e83aa684250f02243fbc1236dcbca3c2abd374f5a225027
+  sha256: 0852142385430408b949089bfa388f34b8629218302143884c9636fde62cf6e4
 
 build:
   number: 0
